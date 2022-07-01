@@ -235,6 +235,7 @@ bool Cat::sleep(bool isAsleep)
 	return !isAsleep;
 }
 
+
 /*
  copied UDT 2:
  */
