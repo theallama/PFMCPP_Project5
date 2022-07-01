@@ -5,45 +5,44 @@ Project 5: Part 1 / 4
  Create a branch named Part1
 
 Purpose:  This project continues developing Project3.
-	   you will learn how to take code from existing projects and migrate only
-what you need to new projects you will learn how to write code that doesn't leak
-as well as how to refactor.
+    you will learn how to take code from existing projects and migrate only what you need to new projects
+    you will learn how to write code that doesn't leak as well as how to refactor. 
 
 NOTE: there are 2 sets of instructions:
-	   One for if you completed project 3
-	   One for if you skipped project 3.
+    One for if you completed project 3
+    One for if you skipped project 3.
 
  Destructors
 
 ===============================================================
  If you completed Project 3:
 
- 1) Copy 3 of your user-defined types (the ones with constructors and
-for()/while() loops from Project 3) here Choose the classes that contained
-nested classes.  Include the nested classes when you copy them over.
+ 1) Copy 3 of your user-defined types (the ones with constructors and for()/while() loops from Project 3) here
+     Choose the classes that contained nested classes.  Include the nested classes when you copy them over.
 
  2) move all of your implementations of all functions to OUTSIDE of the class.
 
  3) add destructors
-		make the destructors do something like print out the name of the class.
+	make the destructors do something like print out the name of the class.
 ===============================================================
 If you skipped Project 3:
 write 3 UDTs below that EACH have:
-		5 member variables
-			the member variable names and types should be relevant to the work
-the UDT will perform. pick properties that can be represented with 'int float
-double bool char std::string' 3 member functions with an arbitrary number of
+	5 member variables
+		the member variable names and types should be relevant to the work
+the UDT will perform. 
+        pick properties that can be represented with 'int float
+double bool char std::string' 
+    3 member functions with an arbitrary number of
 parameters give some of those parameters default values. constructors that
 initialize some of these member variables the remaining member variables should
-be initialized in-class for() or while() loops that modify member variables 1) 2
-of your 3 UDTs need to have a nested UDT. this nested UDT should fulfill the
+be initialized in-class for() or while() loops that modify member variables 
+ 1) 2 of your 3 UDTs need to have a nested UDT. this nested UDT should fulfill the
 same requirements as above: 5 member variables 3 member functions constructors
 and loops.
-
  2) Define your implementations of all functions OUTSIDE of the class.
  NO IN-CLASS IMPLEMENTATION ALLOWED
  3) add destructors to all of your UDTs
-		make the destructors do something like print out the name of the class.
+	make the destructors do something like print out the name of the class.
 ===============================================================
 
  4) add 2 new UDTs that use only the types you copied above as member variables.
@@ -80,19 +79,21 @@ compiler arguments. You can resolve any [-Wpadded] warnings by adding
 /*
  copied UDT 1:
  */
-struct Cat {
-	Cat();
-	~Cat();
-	std::string type;
-	int numEars;
-	float dailyFoodIntake{5.4f};
-	std::string furColor = "brown";
-	double tailLength = 5.3432;
+struct Cat 
+{
+    Cat();
+    ~Cat();
+    std::string type;
+    int numEars;
+    float dailyFoodIntake{5.4f};
+    std::string furColor = "brown";
+    double tailLength = 5.3432;
 
-	struct Kitten {
-		int birthYear{2020};
-		Kitten();
-		~Kitten();
+    struct Kitten 
+    {
+        int birthYear{2020};
+        Kitten();
+        ~Kitten();
 		std::string disposition;
 		int numLegs = 4;
 		int numWhiskers{24};
@@ -113,29 +114,33 @@ struct Cat {
 	Kitten kittenJunior;
 };
 
-Cat::Cat() : type("domesticated"), numEars(2), dailyFoodIntake(5.1f) {
-	std::cout << "A typical " << type << " cat  has " << numEars
-			  << " ears and eats one " << dailyFoodIntake
-			  << " oz can of cat food a day." << std::endl;
+Cat::Cat() : type("domesticated"), numEars(2), dailyFoodIntake(5.1f) 
+{
+	std::cout << "A typical " << type << " cat  has " << numEars << " ears and eats one " << dailyFoodIntake << " oz can of cat food a day." << std::endl;
 }
 
-Cat::~Cat() {
+Cat::~Cat() 
+{
 	std::cout << "Cat being destructed!" << std::endl;
 }
 
-Cat::Kitten::~Kitten() {
+Cat::Kitten::~Kitten() 
+{
 	std::cout << "Kitten being destructed!" << std::endl;
 }
 
-Cat::Kitten::Kitten() : disposition("nice"), numWhiskers(26) {
+Cat::Kitten::Kitten() : disposition("nice"), numWhiskers(26) 
+{
 	std::cout << "A " << disposition << " kitten with " << numWhiskers
 			  << " whiskers being constructed!" << std::endl;
 }
 
-void Cat::Kitten::roll(int numRolls, int happyIdxOutOfTen = 0) {
+void Cat::Kitten::roll(int numRolls, int happyIdxOutOfTen = 0) 
+{
 	auto hi = happyIdxOutOfTen;
 	while (numRolls < 30) {
-		for (hi = 1; hi <= 9; ++hi) {
+		for (hi = 1; hi <= 9; ++hi) 
+        {
 			numRolls += 10;
 			std::cout << "Kitten rolls " << numRolls << " times on the floor."
 					  << std::endl;
@@ -144,32 +149,41 @@ void Cat::Kitten::roll(int numRolls, int happyIdxOutOfTen = 0) {
 	std::cout << "Kitten is feeling too dizzy to roll anymore." << std::endl;
 }
 
-void Cat::Kitten::feed(bool isHungry) {
+void Cat::Kitten::feed(bool isHungry)
+{
 	float singlePortion = 0;
-	if (isHungry) {
+	if (isHungry) 
+    {
 		singlePortion = 6.f;
 	}
 	std::cout << "Kitty can have " << singlePortion << " oz of food."
 			  << std::endl;
 }
 
-void Cat::Kitten::pet(bool isAffectionate, float minutesToPet) {
-	if (isAffectionate) {
+void Cat::Kitten::pet(bool isAffectionate, float minutesToPet) 
+{
+	if (isAffectionate) 
+    {
 		minutesToPet = 20.f;
 	}
 }
-void Cat::Kitten::roamNeighborhood(bool rainyWeather, float avgCatTravels) {
+void Cat::Kitten::roamNeighborhood(bool rainyWeather, float avgCatTravels)
+{
 	float milesTraveled;
-	if (!rainyWeather) {
+	if (!rainyWeather) 
+    {
 		milesTraveled = avgCatTravels * 2;
 	}
 }
 
-void Cat::gainWeight(int weight) {
+void Cat::gainWeight(int weight) 
+{
 	int overweightThreshold = 30;
 	int week;
-	while (weight < overweightThreshold) {
-		for (week = 1; week <= 4; week++) {
+	while (weight < overweightThreshold) 
+    {
+		for (week = 1; week <= 4; week++) 
+        {
 			dailyFoodIntake += 3.f;
 			std::cout << "Kitty eating more and more every day" << std::endl;
 			weight += 5;
@@ -178,35 +192,44 @@ void Cat::gainWeight(int weight) {
 	std::cout << "Kitty on a diet." << weight << std::endl;
 }
 
-void Cat::scratchFurniture(bool isChair, int numFurnitureDestroyed) {
-	if (!isChair) {
+void Cat::scratchFurniture(bool isChair, int numFurnitureDestroyed) 
+{
+	if (!isChair) 
+    {
 		numFurnitureDestroyed += 1;
 	}
 }
 
-void Cat::makeNoise(bool foodBowlEmpty) {
+void Cat::makeNoise(bool foodBowlEmpty) 
+{
 	std::string noise = "";
-	if (foodBowlEmpty) {
+	if (foodBowlEmpty) 
+    {
 		noise = "meow";
 
-	} else {
+	} 
+    else 
+    {
 		noise = "purr";
 	}
 	std::cout << "Cat goes: " << noise << std::endl;
 }
 
-struct Time {
+struct Time 
+{
 	int year = 2022, month = 6, day = 23, hour = 7, minute = 1, second = 5;
 	bool isPM = true;
 };
 
-bool Cat::sleep(bool isAsleep) {
+bool Cat::sleep(bool isAsleep) 
+{
 	Time startTime, endTime;
 	startTime.hour = 0;
 	endTime.hour = 5;
 
 	if (startTime.hour > 0 && startTime.isPM == false && endTime.hour < 5 &&
-		endTime.isPM == false) {
+		endTime.isPM == false) 
+    {
 		return isAsleep;
 	}
 	return !isAsleep;
@@ -225,11 +248,12 @@ struct Range {
 	int numOfTops;
 	int width = 36;
 
-	struct RangeControls {
+	struct RangeControls 
+    {
 		int date_;
-		RangeControls() : date_(20220628) {
-		}
-		~RangeControls() {
+		RangeControls() : date_(20220628) {}
+		~RangeControls() 
+        {
 			std::cout << "Range being destructed" << std::endl;
 		}
 		std::string clockSettingOption{"24hrs"};
@@ -255,18 +279,23 @@ struct Range {
 	RangeControls updatedSettings;
 };
 
-Range::Range() : numOfRack(3), numOfTops(6) {
+Range::Range() : numOfRack(3), numOfTops(6) 
+{
 	std::cout << "Range with " << numOfRack << " oven racks and " << numOfTops
 			  << " cooktops being constructed" << std::endl;
 }
 
-Range::~Range() {
+Range::~Range() 
+{
 	std::cout << "Range being destructed" << std::endl;
 }
 
-void Range::getBigger(int price) {
-	while (numOfTops < 10) {
-		for (price = 1500; price <= 1505; ++price) {
+void Range::getBigger(int price) 
+{
+	while (numOfTops < 10) 
+    {
+		for (price = 1500; price <= 1505; ++price) 
+        {
 			numOfTops += 1;
 			std::cout << "Pricier ovens have more cooktops." << std::endl;
 		}
@@ -276,34 +305,44 @@ void Range::getBigger(int price) {
 
 void Range::consumeFuel(
 	std::string fuelSource = "electric",
-	int energyEfficiency = 65) {
+	int energyEfficiency = 65) 
+{
 	std::cout << "On average," << fuelSource << " convection oven has "
 			  << energyEfficiency << " percent cooking energy efficiency."
 			  << std::endl;
 }
 
-void Range::breaksDown(int ageOfHeatingElement) {
-	if (ageOfHeatingElement >= 50) {
+void Range::breaksDown(int ageOfHeatingElement) 
+{
+	if (ageOfHeatingElement >= 50) 
+    {
 		std::cout << "It'll break down within a year." << std::endl;
-	} else if (ageOfHeatingElement > 10 && ageOfHeatingElement < 50) {
+	} 
+    else if (ageOfHeatingElement > 10 && ageOfHeatingElement < 50) 
+    {
 		std::cout << "Range can be used for a few more years." << std::endl;
 	}
 }
 
-void Range::heatsTheKitchen(int durationOperated, int ovenTemp) {
+void Range::heatsTheKitchen(int durationOperated, int ovenTemp) 
+{
 	int kitchenTemp = 70;
-	if (durationOperated > 0 && ovenTemp > 0) {
+	if (durationOperated > 0 && ovenTemp > 0) 
+    {
 		kitchenTemp = kitchenTemp + (ovenTemp / 100) * (durationOperated / 4);
 	}
 	std::cout << "Currently kitchen temp is " << kitchenTemp
 			  << " due to oven use." << std::endl;
 }
 
-void Range::RangeControls::turnUpTemp(int ovenTemp = 350) {
-	while (ovenTemp <= 355) {
+void Range::RangeControls::turnUpTemp(int ovenTemp = 350) 
+{
+	while (ovenTemp <= 355) 
+    {
 		int degreeKnobTurned;
 		for (degreeKnobTurned = 0; degreeKnobTurned <= maxKnobTurned;
-			 ++degreeKnobTurned) {
+			 ++degreeKnobTurned) 
+        {
 			ovenTemp += 1;
 			std::cout << "Increasing the oven temperature." << std::endl;
 		}
@@ -311,30 +350,38 @@ void Range::RangeControls::turnUpTemp(int ovenTemp = 350) {
 	std::cout << "Warning. Oven too hot." << std::endl;
 }
 
-void Range::RangeControls::printDaysLeft(int warrantyBy = 20220630) {
+void Range::RangeControls::printDaysLeft(int warrantyBy = 20220630) 
+{
 	daysLeft = warrantyBy - date_;
 	std::cout << "You have: " << daysLeft
 			  << " days left until your warrnty expires." << std::endl;
 }
 
-void Range::RangeControls::informCurrentTime(bool timeUpdated) {
+void Range::RangeControls::informCurrentTime(bool timeUpdated) 
+{
 	std::string updatedTime = "17:00:00", currentTime = "12:00:00";
-	if (timeUpdated) {
+	if (timeUpdated) 
+    {
 		std::cout << "Time updated to: " << updatedTime << std::endl;
 	}
 	std::cout << "Current time is: " << currentTime << std::endl;
 }
-void Range::RangeControls::indicateRepairDate(
-	std::string date,
-	bool needsRepair) {
-	if (needsRepair) {
+void Range::RangeControls::indicateRepairDate(std::string date, bool needsRepair) 
+{
+	if (needsRepair) 
+    {
 		std::cout << "Range needs repair by " << date << std::endl;
-	} else {
+	} 
+    else 
+    {
 		std::cout << "Range In Good Shape" << std::endl;
 	}
 }
-bool Range::RangeControls::selfCleans(bool heavyCleaning, std::string setting) {
-	if (setting == "heavy") {
+
+bool Range::RangeControls::selfCleans(bool heavyCleaning, std::string setting) 
+{
+	if (setting == "heavy") 
+    {
 		return heavyCleaning;
 	}
 	return !heavyCleaning;
@@ -414,8 +461,8 @@ void PlaneWings::lowersLandingSpeed (int drag, bool landed, float landingSpeed )
  new UDT 4:
  with 2 member functions
  */
-struct Kitchen {
-
+struct Kitchen 
+{
 	Range range;
 	Range::RangeControls rangeControls;
 
@@ -426,15 +473,18 @@ struct Kitchen {
 	void safetyAlertViaWiFi(int currentOvenTemp, int setOvenTemp, int currentTime);
 };
 
-Kitchen::Kitchen() {
+Kitchen::Kitchen() 
+{
 	std::cout << "Kitchen being constructed." << std::endl;
 }
 
-Kitchen::~Kitchen() {
+Kitchen::~Kitchen() 
+{
 	std::cout << "Kitchen being destructed." << std::endl;
 }
 
-void Kitchen::designSpace(std::string addSlightVariation, int wallWidth) {
+void Kitchen::designSpace(std::string addSlightVariation, int wallWidth) 
+{
 	std::string themeColor =
 		addSlightVariation + rangeControls.controlPanelColor;
 	int measureSpaceForFridge = wallWidth - range.width;
@@ -494,26 +544,26 @@ Concorde::~Concorde()
 }
 
 int Concorde::lengthDeIcingPanel (int variation)
-	{
-	    int n = 1;
-	    int hypotenuse;
-	    int cWingSpan = pw.wingSpan  / 2 - variation;
-	    return hypotenuse = cWingSpan / n;
-	}
+{
+    int n = 1;
+	int hypotenuse;
+	int cWingSpan = pw.wingSpan  / 2 - variation;
+	return hypotenuse = cWingSpan / n;
+}
 
 int Concorde::topSpeed(int cNumEngines) 
+{
+	int cSpeed;
+	while (cNumEngines <= 4) 
     {
-		int cSpeed;
-		while (cNumEngines <= 4) 
+		if (cNumEngines == pw.numEngines) 
         {
-			if (cNumEngines == pw.numEngines) 
-            {
-				cSpeed = pw.maxSpeed * 2;
-			}
-			cNumEngines += 1;
+			cSpeed = pw.maxSpeed * 2;
 		}
-		return cNumEngines;
+		cNumEngines += 1;
 	}
+	return cNumEngines;
+}
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
