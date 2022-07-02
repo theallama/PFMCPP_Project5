@@ -242,173 +242,171 @@ bool Cat::sleep(bool isAsleep)
  copied UDT 2:
  */
 
-struct Range {
-	Range();
-	~Range();
-	int numOfRack;
-	int maxTempOven = 450;
-	std::string fuelType = "gas";
-	int numOfTops;
-	int width = 36;
-
-	struct RangeControls 
+struct Range 
+{
+    Range();
+    ~Range();
+    int numOfRack;
+    int maxTempOven = 450;
+    std::string fuelType = "gas";
+    int numOfTops;
+    int width = 36;
+    
+    struct RangeControls 
     {
-		int date_;
-		RangeControls() : date_(20220628) {}
-		~RangeControls() 
+        int date_;
+        RangeControls() : date_(20220628) {}
+        ~RangeControls() 
         {
-			std::cout << "Range being destructed" << std::endl;
-		}
-		std::string clockSettingOption{"24hrs"};
-		int daysLeft;
-		std::string controlPanelColor = "chrome";
-		int controlPanelWidth = 24;
-		bool supportsWifi = true;
-		bool isAnalog = false;
-		int maxKnobTurned = 10;
-
-		void printDaysLeft(int warrantyBy);
-		void informCurrentTime(bool timeUpdated);
-		void indicateRepairDate(std::string date, bool needsRepair);
-		bool selfCleans(bool heavyCleaning = true, std::string setting = "");
-		void turnUpTemp(int ovenTemp);
-	};
-
-	void consumeFuel(std::string, int);
-	void breaksDown(int ageOfHeatingElement);
-	void heatsTheKitchen(int, int);
-	void getBigger(int price);
-
-	RangeControls updatedSettings;
+            std::cout << "Range being destructed" << std::endl;
+        }
+        std::string clockSettingOption{"24hrs"};
+        int daysLeft;
+        std::string controlPanelColor = "chrome";
+        int controlPanelWidth = 24;
+        bool supportsWifi = true;
+        bool isAnalog = false;
+        int maxKnobTurned = 10;
+        
+        void printDaysLeft(int warrantyBy);
+        void informCurrentTime(bool timeUpdated);
+        void indicateRepairDate(std::string date, bool needsRepair);
+        bool selfCleans(bool heavyCleaning = true, std::string setting = "");
+        void turnUpTemp(int ovenTemp);
+    };
+    
+    void consumeFuel(std::string, int);
+    void breaksDown(int ageOfHeatingElement);
+    void heatsTheKitchen(int, int);
+    void getBigger(int price);
+    
+    RangeControls updatedSettings;
 };
 
 Range::Range() : numOfRack(3), numOfTops(6) 
 {
-	std::cout << "Range with " << numOfRack << " oven racks and " << numOfTops
-			  << " cooktops being constructed" << std::endl;
+    std::cout << "Range with " << numOfRack << " oven racks and " << numOfTops
+    << " cooktops being constructed" << std::endl;
 }
 
 Range::~Range() 
 {
-	std::cout << "Range being destructed" << std::endl;
+    std::cout << "Range being destructed" << std::endl;
 }
 
 void Range::getBigger(int price) 
 {
-	while (numOfTops < 10) 
+    while (numOfTops < 10) 
     {
-		for (price = 1500; price <= 1505; ++price) 
+        for (price = 1500; price <= 1505; ++price) 
         {
-			numOfTops += 1;
-			std::cout << "Pricier ovens have more cooktops." << std::endl;
-		}
-	}
-	std::cout << "Ovens do not come in a bigger size." << std::endl;
+            numOfTops += 1;
+            std::cout << "Pricier ovens have more cooktops." << std::endl;
+        }
+    }
+    std::cout << "Ovens do not come in a bigger size." << std::endl;
 }
 
-void Range::consumeFuel(
-	std::string fuelSource = "electric",
-	int energyEfficiency = 65) 
+void Range::consumeFuel(std::string fuelSource = "electric", int energyEfficiency = 65) 
 {
-	std::cout << "On average," << fuelSource << " convection oven has "
-			  << energyEfficiency << " percent cooking energy efficiency."
-			  << std::endl;
+    std::cout << "On average," << fuelSource << " convection oven has "
+    << energyEfficiency << " percent cooking energy efficiency."
+    << std::endl;
 }
 
 void Range::breaksDown(int ageOfHeatingElement) 
 {
-	if (ageOfHeatingElement >= 50) 
+    if (ageOfHeatingElement >= 50) 
     {
-		std::cout << "It'll break down within a year." << std::endl;
-	} 
+        std::cout << "It'll break down within a year." << std::endl;
+    } 
     else if (ageOfHeatingElement > 10 && ageOfHeatingElement < 50) 
     {
-		std::cout << "Range can be used for a few more years." << std::endl;
-	}
+        std::cout << "Range can be used for a few more years." << std::endl;
+    }
 }
 
 void Range::heatsTheKitchen(int durationOperated, int ovenTemp) 
 {
-	int kitchenTemp = 70;
-	if (durationOperated > 0 && ovenTemp > 0) 
+    int kitchenTemp = 70;
+    if (durationOperated > 0 && ovenTemp > 0) 
     {
-		kitchenTemp = kitchenTemp + (ovenTemp / 100) * (durationOperated / 4);
-	}
-	std::cout << "Currently kitchen temp is " << kitchenTemp
-			  << " due to oven use." << std::endl;
+        kitchenTemp = kitchenTemp + (ovenTemp / 100) * (durationOperated / 4);
+    }
+    std::cout << "Currently kitchen temp is " << kitchenTemp << " due to oven use." << std::endl;
 }
 
 void Range::RangeControls::turnUpTemp(int ovenTemp = 350) 
 {
-	while (ovenTemp <= 355) 
+    while (ovenTemp <= 355) 
     {
-		int degreeKnobTurned;
-		for (degreeKnobTurned = 0; degreeKnobTurned <= maxKnobTurned;
-			 ++degreeKnobTurned) 
+        int degreeKnobTurned;
+        for (degreeKnobTurned = 0; degreeKnobTurned <= maxKnobTurned;
+        ++degreeKnobTurned) 
         {
-			ovenTemp += 1;
-			std::cout << "Increasing the oven temperature." << std::endl;
-		}
-	}
-	std::cout << "Warning. Oven too hot." << std::endl;
+            ovenTemp += 1;
+            std::cout << "Increasing the oven temperature." << std::endl;
+        }
+    }
+    std::cout << "Warning. Oven too hot." << std::endl;
 }
 
 void Range::RangeControls::printDaysLeft(int warrantyBy = 20220630) 
 {
-	daysLeft = warrantyBy - date_;
-	std::cout << "You have: " << daysLeft
-			  << " days left until your warrnty expires." << std::endl;
+    daysLeft = warrantyBy - date_;
+    std::cout << "You have: " << daysLeft
+    << " days left until your warrnty expires." << std::endl;
 }
 
 void Range::RangeControls::informCurrentTime(bool timeUpdated) 
 {
-	std::string updatedTime = "17:00:00", currentTime = "12:00:00";
-	if (timeUpdated) 
+    std::string updatedTime = "17:00:00", currentTime = "12:00:00";
+    if (timeUpdated) 
     {
-		std::cout << "Time updated to: " << updatedTime << std::endl;
-	}
-	std::cout << "Current time is: " << currentTime << std::endl;
+        std::cout << "Time updated to: " << updatedTime << std::endl;
+    }
+    std::cout << "Current time is: " << currentTime << std::endl;
 }
 void Range::RangeControls::indicateRepairDate(std::string date, bool needsRepair) 
 {
-	if (needsRepair) 
+    if (needsRepair) 
     {
-		std::cout << "Range needs repair by " << date << std::endl;
-	} 
+        std::cout << "Range needs repair by " << date << std::endl;
+    } 
     else 
     {
-		std::cout << "Range In Good Shape" << std::endl;
-	}
+        std::cout << "Range In Good Shape" << std::endl;
+    }
 }
 
 bool Range::RangeControls::selfCleans(bool heavyCleaning, std::string setting) 
 {
-	if (setting == "heavy") 
+    if (setting == "heavy") 
     {
-		return heavyCleaning;
-	}
-	return !heavyCleaning;
+        return heavyCleaning;
+    }
+    return !heavyCleaning;
 }
 
 /*
- copied UDT 3:
- */
+copied UDT 3:
+*/
 struct PlaneWings 
 {
-	PlaneWings();
-	~PlaneWings();
-
-	int maxFlex = 28;
-	int fuelCarried = 23;
-	int numOfAilerons = 4;
-	int numEngines = 4;
-	int wingSpan;
-	int maxSpeed = 656;
-
-	void generateLift(bool, std::string);
-	bool reduceDrag(float tailwind = 10.f);
-	void lowersLandingSpeed(int drag, bool landed = false, float landingSpeed = 30.2f);
-	void flex(int flex);
+    PlaneWings();
+    ~PlaneWings();
+    
+    int maxFlex = 28;
+    int fuelCarried = 23;
+    int numOfAilerons = 4;
+    int numEngines = 4;
+    int wingSpan;
+    int maxSpeed = 656;
+    
+    void generateLift(bool, std::string);
+    bool reduceDrag(float tailwind = 10.f);
+    void lowersLandingSpeed(int drag, bool landed = false, float landingSpeed = 30.2f);
+    void flex(int flex);
 };
 
 PlaneWings::PlaneWings()
@@ -424,16 +422,16 @@ PlaneWings::~PlaneWings()
 
 void PlaneWings::flex(int flex) 
 {
-	while (flex < maxFlex) 
+    while (flex < maxFlex) 
     {
         auto ws = wingSpan;
-		for (ws = 200; ws <= 202; ++ws) 
+        for (ws = 200; ws <= 202; ++ws) 
         {
-			flex += 1;
-			std::cout << "Longer the wing, more it can flex." << std::endl;
-		}
-	}
-	std::cout << "Wing broken when flexed over 28ft." << std::endl;
+            flex += 1;
+            std::cout << "Longer the wing, more it can flex." << std::endl;
+        }
+    }
+    std::cout << "Wing broken when flexed over 28ft." << std::endl;
 }
 
 void PlaneWings::generateLift (bool upwardForce, std::string airDirection)
@@ -449,123 +447,122 @@ void PlaneWings::generateLift (bool upwardForce, std::string airDirection)
 bool PlaneWings::reduceDrag (float tailwind)
 {
     if(tailwind < 10.f) 
-        return true;
+    return true;
     return false;
 }
 void PlaneWings::lowersLandingSpeed (int drag, bool landed, float landingSpeed )
 {
     if(!landed)
     {
-        landingSpeed -= drag;
+    landingSpeed -= drag;
     }
 }
 
 /*
- new UDT 4:
- with 2 member functions
- */
+new UDT 4:
+with 2 member functions
+*/
 struct Kitchen 
 {
-	Range range;
-	Range::RangeControls rangeControls;
-
-	Kitchen();
-	~Kitchen();
-
-	void designSpace(std::string addSlightVariation, int wallWidth);
-	void safetyAlertViaWiFi(int currentOvenTemp, int setOvenTemp, int currentTime);
+    Range range;
+    Range::RangeControls rangeControls;
+    
+    Kitchen();
+    ~Kitchen();
+    
+    void designSpace(std::string addSlightVariation, int wallWidth);
+    void safetyAlertViaWiFi(int currentOvenTemp, int setOvenTemp, int currentTime);
 };
 
 Kitchen::Kitchen() 
 {
-	std::cout << "Kitchen being constructed." << std::endl;
+    std::cout << "Kitchen being constructed." << std::endl;
 }
 
 Kitchen::~Kitchen() 
 {
-	std::cout << "Kitchen being destructed." << std::endl;
+    std::cout << "Kitchen being destructed." << std::endl;
 }
 
 void Kitchen::designSpace(std::string addSlightVariation, int wallWidth) 
 {
-	std::string themeColor =
-		addSlightVariation + rangeControls.controlPanelColor;
-	int measureSpaceForFridge = wallWidth - range.width;
-
-	std::cout << "Kitchen will be designed to go with " << themeColor
-			  << std::endl;
-	std::cout << "We still have enough space for a " << measureSpaceForFridge
-			  << " wide fridge." << std::endl;
+    std::string themeColor =
+    addSlightVariation + rangeControls.controlPanelColor;
+    int measureSpaceForFridge = wallWidth - range.width;
+    
+    std::cout << "Kitchen will be designed to go with " << themeColor
+    << std::endl;
+    std::cout << "We still have enough space for a " << measureSpaceForFridge
+    << " wide fridge." << std::endl;
 }
 
 void Kitchen::safetyAlertViaWiFi(int currentOvenTemp, int setOvenTemp, int currentTime) 
 {
-	if (rangeControls.supportsWifi)
+    if (rangeControls.supportsWifi)
     {
-		if (currentOvenTemp > 0) 
+        if (currentOvenTemp > 0) 
         {
-			while (currentTime < 2400 && currentOvenTemp < setOvenTemp) 
+            while (currentTime < 2400 && currentOvenTemp < setOvenTemp) 
             {
                 currentOvenTemp += 10;
                 int mins;                
-				for (mins = 1; mins <= 10; ++mins) 
+                for (mins = 1; mins <= 10; ++mins) 
                 {
-					std::cout << "Alert to oven user : oven is on at "
-								  << currentOvenTemp << std::endl;
-				}
-			}
-			std::cout << "Auto turn off the oven ." << std::endl;
-		}
-		std::cout << "Oven is not on." << std::endl;
-	}
-	std::cout << "This model doesn't support WiFi feature." << std::endl;
+                    std::cout << "Alert to oven user : oven is on at " << currentOvenTemp << std::endl;
+                }
+            }
+            std::cout << "Auto turn off the oven ." << std::endl;
+        }
+        std::cout << "Oven is not on." << std::endl;
+    }
+    std::cout << "This model doesn't support WiFi feature." << std::endl;
 }
 
 /*
- new UDT 5:
- with 2 member functions
- */
+new UDT 5:
+with 2 member functions
+*/
 struct Concorde 
 {
-	PlaneWings pw;
-
-	Concorde();
-	~Concorde();
-
-	int lengthDeIcingPanel (int variation);
-	int topSpeed(int cNumEngines);
+    PlaneWings pw;
+    
+    Concorde();
+    ~Concorde();
+    
+    int lengthDeIcingPanel (int variation);
+    int topSpeed(int cNumEngines);
 };
 
 Concorde::Concorde() 
 {
-	std::cout << "Concorde being constructed." << std::endl;
+    std::cout << "Concorde being constructed." << std::endl;
 }
 
 Concorde::~Concorde() 
 {
-	std::cout << "Concorde being destructed." << std::endl;
+    std::cout << "Concorde being destructed." << std::endl;
 }
 
 int Concorde::lengthDeIcingPanel (int variation)
 {
     int n = 1;
-	int hypotenuse;
-	int cWingSpan = pw.wingSpan  / 2 - variation;
-	return hypotenuse = cWingSpan / n;
+    int hypotenuse;
+    int cWingSpan = pw.wingSpan  / 2 - variation;
+    return hypotenuse = cWingSpan / n;
 }
 
 int Concorde::topSpeed(int cNumEngines) 
 {
-	int cSpeed;
-	while (cNumEngines <= 4) 
+    int cSpeed;
+    while (cNumEngines <= 4) 
     {
-		if (cNumEngines == pw.numEngines) 
+        if (cNumEngines == pw.numEngines) 
         {
-			cSpeed = pw.maxSpeed * 2;
-		}
-		cNumEngines += 1;
-	}
-	return cNumEngines;
+            cSpeed = pw.maxSpeed * 2;
+        }
+        cNumEngines += 1;
+    }
+    return cNumEngines;
 }
 
 /*
@@ -586,72 +583,64 @@ int Concorde::topSpeed(int cNumEngines)
 
 #include <iostream>
 int main() {
-	Cat Mittens;
-
-	Mittens.makeNoise(true);
-	Mittens.scratchFurniture(false, 10);
-	Mittens.sleep(true);
-	Mittens.gainWeight(2);
-
-	std::cout << "Mittens has a " << Mittens.tailLength << " inch long "
-			  << Mittens.furColor << " tail!" << std::endl;
-
-	Cat::Kitten MittensJunior;
-
-	MittensJunior.feed(true);
-	MittensJunior.pet(true, 20);
-	MittensJunior.roamNeighborhood(false, 30);
-	MittensJunior.roll(8, 6);
-
-	std::cout << "Mittens Junior is " << (2022 - MittensJunior.birthYear)
-			  << " year old " << MittensJunior.catBreed << std::endl;
-
-	Range myRange;
-
-	myRange.consumeFuel("electric", 65);
-	myRange.breaksDown(70);
-	myRange.heatsTheKitchen(7, 420);
-	myRange.getBigger(1501);
-
-	std::cout << "My range has a " << myRange.fuelType
-			  << " powered oven that reaches up to " << myRange.maxTempOven
-			  << " F in temp." << std::endl;
-
-	Range::RangeControls specialFeature;
-	specialFeature.printDaysLeft(20220630);
-
-	Range::RangeControls backControls;
-
-	backControls.informCurrentTime(false);
-	backControls.indicateRepairDate("July 25th 2022", true);
-	backControls.selfCleans(false, "light");
-	backControls.turnUpTemp(350);
-
-	std::cout << "The most popular model is " << backControls.controlPanelColor
-			  << " with its cotrol panel width of "
-			  << backControls.controlPanelWidth << "." << std::endl;
-
-	PlaneWings jjWings;
-
-	jjWings.generateLift(true, "down");
-	jjWings.reduceDrag(10.f);
-	jjWings.lowersLandingSpeed(10, false, 50);
-	jjWings.flex(26);
-
-	std::cout << "The jumbo jet has a wingspan of " << jjWings.wingSpan
-			  << " ft and " << jjWings.numEngines
-			  << " engines are attached to the lower side of the wings."
-			  << std::endl;
-
-	std::cout << "good to go!" << std::endl;
-
-	Kitchen myKitchen;
-
-	myKitchen.designSpace("darker", 80);
+    Cat Mittens;
+    
+    Mittens.makeNoise(true);
+    Mittens.scratchFurniture(false, 10);
+    Mittens.sleep(true);
+    Mittens.gainWeight(2);
+    
+    std::cout << "Mittens has a " << Mittens.tailLength << " inch long " << Mittens.furColor << " tail!" << std::endl;
+    
+    Cat::Kitten MittensJunior;
+    
+    MittensJunior.feed(true);
+    MittensJunior.pet(true, 20);
+    MittensJunior.roamNeighborhood(false, 30);
+    MittensJunior.roll(8, 6);
+    
+    std::cout << "Mittens Junior is " << (2022 - MittensJunior.birthYear) << " year old " << MittensJunior.catBreed << std::endl;
+    
+    Range myRange;
+    
+    myRange.consumeFuel("electric", 65);
+    myRange.breaksDown(70);
+    myRange.heatsTheKitchen(7, 420);
+    myRange.getBigger(1501);
+    
+    std::cout << "My range has a " << myRange.fuelType << " powered oven that reaches up to " << myRange.maxTempOven
+              << " F in temp." << std::endl;
+    
+    Range::RangeControls specialFeature;
+    specialFeature.printDaysLeft(20220630);
+    
+    Range::RangeControls backControls;
+    
+    backControls.informCurrentTime(false);
+    backControls.indicateRepairDate("July 25th 2022", true);
+    backControls.selfCleans(false, "light");
+    backControls.turnUpTemp(350);
+    
+    std::cout << "The most popular model is " << backControls.controlPanelColor << " with its cotrol panel width of " << backControls.controlPanelWidth << "." << std::endl;
+    
+    PlaneWings jjWings;
+    
+    jjWings.generateLift(true, "down");
+    jjWings.reduceDrag(10.f);
+    jjWings.lowersLandingSpeed(10, false, 50);
+    jjWings.flex(26);
+    
+    std::cout << "The jumbo jet has a wingspan of " << jjWings.wingSpan << " ft and " << jjWings.numEngines << " engines are attached to the lower side of the wings." << std::endl;
+    
+    std::cout << "good to go!" << std::endl;
+    
+    Kitchen myKitchen;
+    
+    myKitchen.designSpace("darker", 80);
     myKitchen.safetyAlertViaWiFi(380, 390, 2397);
-
+    
     Concorde concorde;
-
+    
     concorde.lengthDeIcingPanel(10);
     concorde.topSpeed(2);
 }
