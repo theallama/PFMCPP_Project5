@@ -81,158 +81,161 @@ compiler arguments. You can resolve any [-Wpadded] warnings by adding
  */
 struct Cat 
 {
-    Cat();
-    ~Cat();
-    std::string type;
-    int numEars;
-    float dailyFoodIntake{5.4f};
-    std::string furColor = "brown";
-    double tailLength = 5.3432;
+Cat();
+~Cat();
+std::string type;
+int numEars;
+float dailyFoodIntake{5.4f};
+std::string furColor = "brown";
+double tailLength = 5.3432;
 
-    struct Kitten 
-    {
-        int birthYear{2020};
-        Kitten();
-        ~Kitten();
-		std::string disposition;
-		int numLegs = 4;
-		int numWhiskers{24};
-		std::string catBreed = "Tabby";
-
-		void feed(bool isHungry);
-		void pet(bool isAffectionate, float minutesToPet);
-		void roamNeighborhood(bool rainyWeather, float avgCatTravels = 20.f);
-		void roll(int numRolls, int happyIdxOutOfTen);
-	};
-
-	void scratchFurniture(bool isChair = false, int numberOfFurniture = 10);
-	void makeNoise(bool foodBowlEmpty = true);
-	bool sleep(bool isAsleep = true);
-	void typicalCat(std::string, int, float);
-	void gainWeight(int weight);
-
-	Kitten kittenJunior;
+struct Kitten 
+{
+    int birthYear{2020};
+    Kitten();
+    ~Kitten();
+    std::string disposition;
+    int numLegs = 4;
+    int numWhiskers{24};
+    std::string catBreed = "Tabby";
+    
+    void feed(bool isHungry);
+    void pet(bool isAffectionate, float minutesToPet);
+    void roamNeighborhood(bool rainyWeather, float avgCatTravels = 20.f);
+    void roll(int numRolls, int happyIdxOutOfTen);
+    };
+    
+    void scratchFurniture(bool isChair = false, int numberOfFurniture = 10);
+    void makeNoise(bool foodBowlEmpty = true);
+    bool sleep(bool isAsleep = true);
+    void typicalCat(std::string, int, float);
+    void gainWeight(int weight);
+    
+    Kitten kittenJunior;
 };
 
 Cat::Cat() : type("domesticated"), numEars(2), dailyFoodIntake(5.1f) 
 {
-	std::cout << "A typical " << type << " cat  has " << numEars << " ears and eats one " << dailyFoodIntake << " oz can of cat food a day." << std::endl;
+    std::cout << "A typical " << type << " cat  has " << numEars << " ears and eats one " << dailyFoodIntake << " oz can of cat food a day." << std::endl;
 }
 
 Cat::~Cat() 
 {
-	std::cout << "Cat being destructed!" << std::endl;
+    std::cout << "Cat being destructed!" << std::endl;
 }
 
 Cat::Kitten::~Kitten() 
 {
-	std::cout << "Kitten being destructed!" << std::endl;
+    std::cout << "Kitten being destructed!" << std::endl;
 }
 
 Cat::Kitten::Kitten() : disposition("nice"), numWhiskers(26) 
 {
-	std::cout << "A " << disposition << " kitten with " << numWhiskers
-			  << " whiskers being constructed!" << std::endl;
+    std::cout << "A " << disposition << " kitten with " << numWhiskers
+    << " whiskers being constructed!" << std::endl;
 }
 
 void Cat::Kitten::roll(int numRolls, int happyIdxOutOfTen = 0) 
 {
-	auto hi = happyIdxOutOfTen;
-	while (numRolls < 30) {
-		for (hi = 1; hi <= 9; ++hi) 
+    auto hi = happyIdxOutOfTen;
+    while (numRolls < 30) 
+    {
+        for (hi = 1; hi <= 9; ++hi) 
         {
-			numRolls += 10;
-			std::cout << "Kitten rolls " << numRolls << " times on the floor."
-					  << std::endl;
-		}
-	}
-	std::cout << "Kitten is feeling too dizzy to roll anymore." << std::endl;
+            numRolls += 10;
+            std::cout << "Kitten rolls " << numRolls << " times on the floor."
+            << std::endl;
+        }
+    }
+    std::cout << "Kitten is feeling too dizzy to roll anymore." << std::endl;
 }
 
 void Cat::Kitten::feed(bool isHungry)
 {
-	float singlePortion = 0;
-	if (isHungry) 
+    float singlePortion = 0;
+    if (isHungry) 
     {
-		singlePortion = 6.f;
-	}
-	std::cout << "Kitty can have " << singlePortion << " oz of food."
-			  << std::endl;
+        singlePortion = 6.f;
+    }
+    std::cout << "Kitty can have " << singlePortion << " oz of food." << std::endl;
 }
 
 void Cat::Kitten::pet(bool isAffectionate, float minutesToPet) 
 {
-	if (isAffectionate) 
+    if (isAffectionate) 
     {
-		minutesToPet = 20.f;
-	}
+        minutesToPet = 20.f;
+    }
 }
 void Cat::Kitten::roamNeighborhood(bool rainyWeather, float avgCatTravels)
 {
-	float milesTraveled;
-	if (!rainyWeather) 
+    float milesTraveled;
+    if (!rainyWeather) 
     {
-		milesTraveled = avgCatTravels * 2;
-	}
+        milesTraveled = avgCatTravels * 2;
+    }
 }
 
 void Cat::gainWeight(int weight) 
 {
-	int overweightThreshold = 30;
-	int week;
-	while (weight < overweightThreshold) 
+    int overweightThreshold = 30;
+    int week;
+    while (weight < overweightThreshold) 
     {
-		for (week = 1; week <= 4; week++) 
+        for (week = 1; week <= 4; week++) 
         {
-			dailyFoodIntake += 3.f;
-			std::cout << "Kitty eating more and more every day" << std::endl;
-			weight += 5;
-		}
-	}
-	std::cout << "Kitty on a diet." << weight << std::endl;
+            dailyFoodIntake += 3.f;
+            std::cout << "Kitty eating more and more every day" << std::endl;
+            weight += 5;
+        }
+    }
+    std::cout << "Kitty on a diet." << weight << std::endl;
 }
 
 void Cat::scratchFurniture(bool isChair, int numFurnitureDestroyed) 
 {
-	if (!isChair) 
+    if (!isChair) 
     {
-		numFurnitureDestroyed += 1;
-	}
+        numFurnitureDestroyed += 1;
+    }
 }
 
 void Cat::makeNoise(bool foodBowlEmpty) 
 {
-	std::string noise = "";
-	if (foodBowlEmpty) 
+    std::string noise = "";
+    if (foodBowlEmpty) 
     {
-		noise = "meow";
-
-	} 
+        noise = "meow";
+    } 
     else 
     {
-		noise = "purr";
-	}
-	std::cout << "Cat goes: " << noise << std::endl;
+        noise = "purr";
+    }
+    std::cout << "Cat goes: " << noise << std::endl;
 }
 
 struct Time 
 {
-	int year = 2022, month = 6, day = 23, hour = 7, minute = 1, second = 5;
-	bool isPM = true;
+    int year = 2022, 
+    month = 6, 
+    day = 23, 
+    hour = 7, 
+    minute = 1, 
+    second = 5;
+    bool isPM = true;
 };
 
 bool Cat::sleep(bool isAsleep) 
 {
-	Time startTime, endTime;
-	startTime.hour = 0;
-	endTime.hour = 5;
-
-	if (startTime.hour > 0 && startTime.isPM == false && endTime.hour < 5 &&
-		endTime.isPM == false) 
+    Time startTime, endTime;
+    startTime.hour = 0;
+    endTime.hour = 5;
+    
+    if (startTime.hour > 0 && startTime.isPM == false && endTime.hour < 5 && endTime.isPM == false) 
     {
-		return isAsleep;
-	}
-	return !isAsleep;
+        return isAsleep;
+    }
+    return !isAsleep;
 }
 
 /*
