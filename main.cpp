@@ -75,6 +75,7 @@ compiler arguments. You can resolve any [-Wpadded] warnings by adding
 
  */
 #include <iostream>
+#include<math.h>  
 
 /*
  copied UDT 1:
@@ -89,30 +90,30 @@ struct Cat
     std::string furColor = "brown";
     double tailLength = 5.3432;
 
-struct Kitten 
-{
-    int birthYear{2020};
-    Kitten();
-    ~Kitten();
-    std::string disposition;
-    int numLegs = 4;
-    int numWhiskers{24};
-    std::string catBreed = "Tabby";
-    
-    void feed(bool isHungry);
-    void pet(bool isAffectionate, float minutesToPet);
-    void roamNeighborhood(bool rainyWeather, float avgCatTravels = 20.f);
-    void roll(int numRolls, int happyIdxOutOfTen);
-    };
-    
-    void scratchFurniture(bool isChair = false, int numberOfFurniture = 10);
-    void makeNoise(bool foodBowlEmpty = true);
-    bool sleep(bool isAsleep = true);
-    void typicalCat(std::string, int, float);
-    void gainWeight(int weight);
-    
-    Kitten kittenJunior;
-};
+        struct Kitten 
+        {
+            int birthYear{2020};
+            Kitten();
+            ~Kitten();
+            std::string disposition;
+            int numLegs = 4;
+            int numWhiskers{24};
+            std::string catBreed = "Tabby";
+            
+            void feed(bool isHungry);
+            void pet(bool isAffectionate, float minutesToPet);
+            void roamNeighborhood(bool rainyWeather, float avgCatTravels = 20.f);
+            void roll(int numRolls, int happyIdxOutOfTen);
+            };
+            
+            void scratchFurniture(bool isChair = false, int numberOfFurniture = 10);
+            void makeNoise(bool foodBowlEmpty = true);
+            bool sleep(bool isAsleep = true);
+            void typicalCat(std::string, int, float);
+            void gainWeight(int weight);
+            
+            Kitten kittenJunior;
+        };
 
 Cat::Cat() : type("domesticated"), numEars(2), dailyFoodIntake(5.1f) 
 {
@@ -251,20 +252,17 @@ struct Range
     std::string fuelType = "gas";
     int numOfTops;
     int width = 36;
+    std::string newModel;
     
     struct RangeControls 
     {
         int date_;
-        RangeControls() : date_(20220628) {}
-        ~RangeControls() 
-        {
-            std::cout << "Range being destructed" << std::endl;
-        }
+        RangeControls();
+        ~RangeControls();
         std::string clockSettingOption{"24hrs"};
         int daysLeft;
         std::string controlPanelColor = "chrome";
         int controlPanelWidth = 24;
-        bool supportsWifi = true;
         bool isAnalog = false;
         int maxKnobTurned = 10;
         
@@ -282,6 +280,16 @@ struct Range
     
     RangeControls updatedSettings;
 };
+
+Range::RangeControls::RangeControls() : date_(20220628)
+{
+    std::cout << "RangeControls being constructed" << std::endl;
+}
+
+Range::RangeControls::~RangeControls() 
+{
+    std::cout << "Range being destructed" << std::endl;
+}
 
 Range::Range() : numOfRack(3), numOfTops(6) 
 {
@@ -400,7 +408,7 @@ struct PlaneWings
     int fuelCarried = 23;
     int numOfAilerons = 4;
     int numEngines = 4;
-    int wingSpan;
+    double wingSpan;
     int maxSpeed = 656;
     
     void generateLift(bool, std::string);
@@ -447,7 +455,9 @@ void PlaneWings::generateLift (bool upwardForce, std::string airDirection)
 bool PlaneWings::reduceDrag (float tailwind)
 {
     if(tailwind < 10.f) 
-    return true;
+    {
+        return true;
+    }
     return false;
 }
 void PlaneWings::lowersLandingSpeed (int drag, bool landed, float landingSpeed )
@@ -471,7 +481,7 @@ struct Kitchen
     ~Kitchen();
     
     void designSpace(std::string addSlightVariation, int wallWidth);
-    void safetyAlertViaWiFi(int currentOvenTemp, int setOvenTemp, int currentTime);
+    void safetyAlertViaWiFi(int currentOvenTemp, int setOvenTemp, int currentTime, std::string newModel);
 };
 
 Kitchen::Kitchen() 
@@ -496,26 +506,30 @@ void Kitchen::designSpace(std::string addSlightVariation, int wallWidth)
     << " wide fridge." << std::endl;
 }
 
-void Kitchen::safetyAlertViaWiFi(int currentOvenTemp, int setOvenTemp, int currentTime) 
+void Kitchen::safetyAlertViaWiFi(int currentOvenTemp, int setOvenTemp, int currentTime, std::string newModel) 
 {
-    if (rangeControls.supportsWifi)
+    bool supportsWifi = (newModel == "new")? true : false; 
+    
+    if (supportsWifi)
     {
         if (currentOvenTemp > 0) 
         {
             while (currentTime < 2400 && currentOvenTemp < setOvenTemp) 
             {
-                currentOvenTemp += 10;
-                int mins;                
-                for (mins = 1; mins <= 10; ++mins) 
-                {
-                    std::cout << "Alert to oven user : oven is on at " << currentOvenTemp << std::endl;
-                }
+                std::cout << "Alert to oven user : oven is on at " << currentOvenTemp << std::endl;
+                currentOvenTemp += 2;
             }
             std::cout << "Auto turn off the oven ." << std::endl;
         }
+        else
+        {
         std::cout << "Oven is not on." << std::endl;
+        }
     }
+    else
+    {
     std::cout << "This model doesn't support WiFi feature." << std::endl;
+    }
 }
 
 /*
@@ -529,7 +543,7 @@ struct Concorde
     Concorde();
     ~Concorde();
     
-    int lengthDeIcingPanel (int variation);
+    double lengthDeIcingPanel (double variation);
     int topSpeed(int cNumEngines);
 };
 
@@ -543,12 +557,13 @@ Concorde::~Concorde()
     std::cout << "Concorde being destructed." << std::endl;
 }
 
-int Concorde::lengthDeIcingPanel (int variation)
+double Concorde::lengthDeIcingPanel (double variation)
 {
-    int n = 1;
-    int hypotenuse;
-    int cWingSpan = pw.wingSpan  / 2 - variation;
-    return hypotenuse = cWingSpan / n;
+    double d = 60*3.14/180; 
+    double hypotenuse = 0;
+    double cWingSpan = pw.wingSpan  / 2 - variation;
+    hypotenuse = cWingSpan / cos(d);
+    return hypotenuse;
 }
 
 int Concorde::topSpeed(int cNumEngines) 
@@ -583,23 +598,23 @@ int Concorde::topSpeed(int cNumEngines)
 
 #include <iostream>
 int main() {
-    Cat Mittens;
+    Cat mittens;
     
-    Mittens.makeNoise(true);
-    Mittens.scratchFurniture(false, 10);
-    Mittens.sleep(true);
-    Mittens.gainWeight(2);
+    mittens.makeNoise(true);
+    mittens.scratchFurniture(false, 10);
+    mittens.sleep(true);
+    mittens.gainWeight(2);
     
-    std::cout << "Mittens has a " << Mittens.tailLength << " inch long " << Mittens.furColor << " tail!" << std::endl;
+    std::cout << "Mittens has a " << mittens.tailLength << " inch long " << mittens.furColor << " tail!" << std::endl;
     
-    Cat::Kitten MittensJunior;
+    Cat::Kitten mittensJunior;
     
-    MittensJunior.feed(true);
-    MittensJunior.pet(true, 20);
-    MittensJunior.roamNeighborhood(false, 30);
-    MittensJunior.roll(8, 6);
+    mittensJunior.feed(true);
+    mittensJunior.pet(true, 20);
+    mittensJunior.roamNeighborhood(false, 30);
+    mittensJunior.roll(8, 6);
     
-    std::cout << "Mittens Junior is " << (2022 - MittensJunior.birthYear) << " year old " << MittensJunior.catBreed << std::endl;
+    std::cout << "Mittens Junior is " << (2022 - mittensJunior.birthYear) << " year old " << mittensJunior.catBreed << std::endl;
     
     Range myRange;
     
@@ -637,7 +652,7 @@ int main() {
     Kitchen myKitchen;
     
     myKitchen.designSpace("darker", 80);
-    myKitchen.safetyAlertViaWiFi(380, 390, 2397);
+    myKitchen.safetyAlertViaWiFi(380, 390, 2397, "new");
     
     Concorde concorde;
     
