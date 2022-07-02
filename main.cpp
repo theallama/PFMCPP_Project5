@@ -81,13 +81,13 @@ compiler arguments. You can resolve any [-Wpadded] warnings by adding
  */
 struct Cat 
 {
-Cat();
-~Cat();
-std::string type;
-int numEars;
-float dailyFoodIntake{5.4f};
-std::string furColor = "brown";
-double tailLength = 5.3432;
+    Cat();
+    ~Cat();
+    std::string type;
+    int numEars;
+    float dailyFoodIntake{5.4f};
+    std::string furColor = "brown";
+    double tailLength = 5.3432;
 
 struct Kitten 
 {
