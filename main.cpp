@@ -90,29 +90,29 @@ struct Cat
     std::string furColor = "brown";
     double tailLength = 5.3432;
 
-        struct Kitten 
-        {
-            int birthYear{2020};
-            Kitten();
-            ~Kitten();
-            std::string disposition;
-            int numLegs = 4;
-            int numWhiskers{24};
-            std::string catBreed = "Tabby";
+        struct Kitten  FIXME indentation
+        { FIXME indentation
+            int birthYear{2020}; FIXME indentation
+            Kitten(); FIXME indentation
+            ~Kitten(); FIXME indentation
+            std::string disposition; FIXME indentation
+            int numLegs = 4; FIXME indentation
+            int numWhiskers{24}; FIXME indentation
+            std::string catBreed = "Tabby"; FIXME indentation
             
-            void feed(bool isHungry);
-            void pet(bool isAffectionate, float minutesToPet);
-            void roamNeighborhood(bool rainyWeather, float avgCatTravels = 20.f);
-            void roll(int numRolls, int happyIdxOutOfTen);
-            };
+            void feed(bool isHungry); FIXME indentation
+            void pet(bool isAffectionate, float minutesToPet); FIXME indentation
+            void roamNeighborhood(bool rainyWeather, float avgCatTravels = 20.f); FIXME indentation
+            void roll(int numRolls, int happyIdxOutOfTen); FIXME indentation
+            }; FIXME indentation
             
-            void scratchFurniture(bool isChair = false, int numberOfFurniture = 10);
-            void makeNoise(bool foodBowlEmpty = true);
-            bool sleep(bool isAsleep = true);
-            void typicalCat(std::string, int, float);
-            void gainWeight(int weight);
+            void scratchFurniture(bool isChair = false, int numberOfFurniture = 10); FIXME indentation
+            void makeNoise(bool foodBowlEmpty = true); FIXME indentation
+            bool sleep(bool isAsleep = true); FIXME indentation
+            void typicalCat(std::string, int, float); FIXME indentation
+            void gainWeight(int weight); FIXME indentation
             
-            Kitten kittenJunior;
+            Kitten kittenJunior; FIXME indentation
         };
 
 Cat::Cat() : type("domesticated"), numEars(2), dailyFoodIntake(5.1f) 
@@ -464,7 +464,7 @@ void PlaneWings::lowersLandingSpeed (int drag, bool landed, float landingSpeed )
 {
     if(!landed)
     {
-    landingSpeed -= drag;
+    landingSpeed -= drag;  FIXME indentation
     }
 }
 
@@ -496,7 +496,7 @@ Kitchen::~Kitchen()
 
 void Kitchen::designSpace(std::string addSlightVariation, int wallWidth) 
 {
-    std::string themeColor =
+    std::string themeColor = FIXME don't spread expressions like this across multiple lines
     addSlightVariation + rangeControls.controlPanelColor;
     int measureSpaceForFridge = wallWidth - range.width;
     
@@ -523,12 +523,12 @@ void Kitchen::safetyAlertViaWiFi(int currentOvenTemp, int setOvenTemp, int curre
         }
         else
         {
-        std::cout << "Oven is not on." << std::endl;
+        std::cout << "Oven is not on." << std::endl; FIXME indentation
         }
     }
     else
     {
-    std::cout << "This model doesn't support WiFi feature." << std::endl;
+    std::cout << "This model doesn't support WiFi feature." << std::endl; FIXME indentation
     }
 }
 
@@ -597,7 +597,7 @@ int Concorde::topSpeed(int cNumEngines)
  */
 
 #include <iostream>
-int main() {
+int main() {  FIXME curly braces go on their own line with no other code
     Cat mittens;
     
     mittens.makeNoise(true);
