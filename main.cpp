@@ -105,6 +105,7 @@ struct Cat
         void pet(bool isAffectionate, float minutesToPet);
         void roamNeighborhood(bool rainyWeather, float avgCatTravels = 20.f);
         void roll(int numRolls, int happyIdxOutOfTen);
+        void printInfoAboutKitten();
     };
             
     void scratchFurniture(bool isChair = false, int numberOfFurniture = 10);
@@ -112,9 +113,20 @@ struct Cat
     bool sleep(bool isAsleep = true);
     void typicalCat(std::string, int, float);
     void gainWeight(int weight);
+    void printInfoAboutCat();
     
     Kitten kittenJunior;
 };
+
+void Cat::printInfoAboutCat()
+{
+    std::cout << "Mittens has a " << this->tailLength << " inch long " << this->furColor << " tail!" << std::endl;
+}
+
+void Cat::Kitten::printInfoAboutKitten()
+{
+    std::cout << "Mittens Junior is " << (2022 - this->birthYear) << " year old " << this->catBreed << std::endl;
+}
 
 Cat::Cat() : type("domesticated"), numEars(2), dailyFoodIntake(5.1f) 
 {
@@ -272,15 +284,27 @@ struct Range
         void indicateRepairDate(std::string date, bool needsRepair);
         bool selfCleans(bool heavyCleaning = true, std::string setting = "");
         void turnUpTemp(int ovenTemp);
+        void printInfoAboutRangeControls();
     };
     
     void consumeFuel(std::string, int);
     void breaksDown(int ageOfHeatingElement);
     void heatsTheKitchen(int, int);
     void getBigger(int price);
+    void printInfoAboutRange();
     
     RangeControls updatedSettings;
 };
+
+void Range::printInfoAboutRange()
+{
+    std::cout << "My range has a " << this->fuelType << " powered oven that reaches up to " << this->maxTempOven
+              << " F in temp." << std::endl;
+}
+void Range::RangeControls::printInfoAboutRangeControls()
+{
+    std::cout << "The most popular model is " << this->controlPanelColor << " with its cotrol panel width of " << this->controlPanelWidth << "." << std::endl;
+}
 
 Range::RangeControls::RangeControls() : date_(20220628)
 {
@@ -416,7 +440,13 @@ struct PlaneWings
     bool reduceDrag(float tailwind = 10.f);
     void lowersLandingSpeed(int drag, bool landed = false, float landingSpeed = 30.2f);
     void flex(int flex);
+    void printInfoAboutPlaneWings();
 };
+
+void PlaneWings::printInfoAboutPlaneWings()
+{
+    std::cout << "'The jumbo jet has a wingspan of " << this->wingSpan << " ft and " << this->numEngines << " engines are attached to the lower side of the wings." << std::endl;
+}
 
 PlaneWings::PlaneWings()
 : numEngines(4), wingSpan(200)
@@ -607,7 +637,9 @@ int main()
     mittens.gainWeight(2);
     
     std::cout << "Mittens has a " << mittens.tailLength << " inch long " << mittens.furColor << " tail!" << std::endl;
-    
+
+    mittens.printInfoAboutCat();
+   
     Cat::Kitten mittensJunior;
     
     mittensJunior.feed(true);
@@ -616,6 +648,8 @@ int main()
     mittensJunior.roll(8, 6);
     
     std::cout << "Mittens Junior is " << (2022 - mittensJunior.birthYear) << " year old " << mittensJunior.catBreed << std::endl;
+
+    mittensJunior.printInfoAboutKitten();
     
     Range myRange;
     
@@ -626,6 +660,8 @@ int main()
     
     std::cout << "My range has a " << myRange.fuelType << " powered oven that reaches up to " << myRange.maxTempOven
               << " F in temp." << std::endl;
+
+    myRange.printInfoAboutRange();
     
     Range::RangeControls specialFeature;
     specialFeature.printDaysLeft(20220630);
@@ -638,7 +674,9 @@ int main()
     backControls.turnUpTemp(350);
     
     std::cout << "The most popular model is " << backControls.controlPanelColor << " with its cotrol panel width of " << backControls.controlPanelWidth << "." << std::endl;
-    
+
+     backControls.printInfoAboutRangeControls();
+
     PlaneWings jjWings;
     
     jjWings.generateLift(true, "down");
@@ -647,9 +685,9 @@ int main()
     jjWings.flex(26);
     
     std::cout << "The jumbo jet has a wingspan of " << jjWings.wingSpan << " ft and " << jjWings.numEngines << " engines are attached to the lower side of the wings." << std::endl;
-    
-    std::cout << "good to go!" << std::endl;
-    
+
+    jjWings.printInfoAboutPlaneWings();
+
     Kitchen myKitchen;
     
     myKitchen.designSpace("darker", 80);
@@ -659,4 +697,6 @@ int main()
     
     concorde.lengthDeIcingPanel(10);
     concorde.topSpeed(2);
+
+    std::cout << "good to go!" << std::endl;
 }
