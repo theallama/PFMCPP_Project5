@@ -120,12 +120,12 @@ struct Cat
 
 void Cat::printInfoAboutCat()
 {
-    std::cout << "Mittens has a " << this -> tailLength << " inch long " << this -> furColor << " tail!" << std::endl;
+    std::cout << "Mittens has a " << this->tailLength << " inch long " << this->furColor << " tail!" << std::endl;
 }
 
 void Cat::Kitten::printInfoAboutKitten()
 {
-    std::cout << "Mittens Junior is " << (2022 - this -> birthYear) << " year old " << this -> catBreed << std::endl;
+    std::cout << "Mittens Junior is " << (2022 - this->birthYear) << " year old " << this->catBreed << std::endl;
 }
 
 Cat::Cat() : type("domesticated"), numEars(2), dailyFoodIntake(5.1f) 
