@@ -677,7 +677,6 @@ int main()
 
      backControls.printInfoAboutRangeControls();
 
-    
     PlaneWings jjWings;
     
     jjWings.generateLift(true, "down");
@@ -688,7 +687,6 @@ int main()
     std::cout << "The jumbo jet has a wingspan of " << jjWings.wingSpan << " ft and " << jjWings.numEngines << " engines are attached to the lower side of the wings." << std::endl;
 
     jjWings.printInfoAboutPlaneWings();
-
 
     Kitchen myKitchen;
     
