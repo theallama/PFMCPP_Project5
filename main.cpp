@@ -1,86 +1,8 @@
-/*
- Project 5: Part 3 / 4
- video: Chapter 3 Part 4: 
-
-Create a branch named Part3
-
- the 'new' keyword
-
- 1) add #include "LeakedObjectDetector.h" to main
- 
- 2) Add 'JUCE_LEAK_DETECTOR(OwnerClass)' at the end of your UDTs.
- 
- 3) write the name of your class where it says "OwnerClass"
- 
- 4) write wrapper classes for each type similar to how it was shown in the video
- 
- 5) update main() 
-      replace your objects with your wrapper classes, which have your UDTs as pointer member variables.
-      
-    This means if you had something like the following in your main() previously: 
-*/
-#if false
- Axe axe;
- std::cout << "axe sharpness: " << axe.sharpness << "\n";
- #endif
- /*
-    you would update that to use your wrappers:
-    
- */
-
-#if false
-AxeWrapper axWrapper( new Axe() );
-std::cout << "axe sharpness: " << axWrapper.axPtr->sharpness << "\n";
-#endif
-/*
-notice that the object name has changed from 'axe' to 'axWrapper'
-You don't have to do this, you can keep your current object name and just change its type to your Wrapper class
-
-6) If you have a class that has a nested class in it, and an instantiation of that nested class as a member variable, 
-    - you do not need to write a Wrapper for that nested class
-    - you do not need to replace that nested instance with a wrapped instance.
-    If you want an explanation, message me in Slack
-
-7) If you were using any UDTs as function arguments like this:
-*/
-#if false
-void someMemberFunction(Axe axe);
-#endif
-/*
-  Pass those arguments by Reference now that you know what references are (Project 6 Part 2).
-*/
-#if false
-void someMemberFunction(Axe& axe);
-#endif
-/*
-If you aren't modifying the passed-in object inside the function, pass by 'const reference'.
-Marking a function parameter as 'const' means that you are promising that the parameter will not be modified.
-Additionally, you can mark class member functions as 'const'
-If you do this, you are promising that the member function will not modify any member variables.
-
-Mark every member function that is not modifying any member variables as 'const'
-*/
-#if false
-//a function where the argument is passed by const-ref
-void someMemberFunction(const Axe& axe);
-
-//a member function that is marked const, meaning it will not modify any member variables of the 'Axe' class.
-void Axe::aConstMemberFunction() const { }
-#endif
-/*
- 8) After you finish, click the [run] button.  Clear up any errors or warnings as best you can.
- 
- see here for an example: https://repl.it/@matkatmusic/ch3p04example
-
- Clear any warnings about exit-time-destructors.
- Suppress them by adding -Wno-exit-time-destructors to the .replit file with the other warning suppression flags
- */
-
-
-
-
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wexit-time-destructors"
 #include <iostream>
-#include<math.h>  
+#include <math.h>
+#include "LeakedObjectDetector.h"
 
 /*
  copied UDT 1:
@@ -120,6 +42,18 @@ struct Cat
     void printInfoAboutCat();
     
     Kitten kittenJunior;
+
+    JUCE_LEAK_DETECTOR(Cat)
+};
+
+struct CatWrapper
+{
+    CatWrapper(Cat* catPtr) : pointerToCat(catPtr) {}
+    ~CatWrapper()
+    {
+        delete pointerToCat;
+    }
+    Cat* pointerToCat = nullptr;
 };
 
 void Cat::printInfoAboutCat()
@@ -298,6 +232,18 @@ struct Range
     void printInfoAboutRange();
     
     RangeControls updatedSettings;
+
+    JUCE_LEAK_DETECTOR(Range)
+};
+
+struct RangeWrapper
+{
+    RangeWrapper(Range* rPtr) : pointerToRange(rPtr) {}
+    ~RangeWrapper()
+    {
+        delete pointerToRange;
+    }
+    Range* pointerToRange = nullptr;
 };
 
 void Range::printInfoAboutRange()
@@ -445,6 +391,18 @@ struct PlaneWings
     void lowersLandingSpeed(int drag, bool landed = false, float landingSpeed = 30.2f);
     void flex(int flex);
     void printInfoAboutPlaneWings();
+
+    JUCE_LEAK_DETECTOR(PlaneWings)
+};
+
+struct PlaneWingsWrapper
+{
+    PlaneWingsWrapper( PlaneWings* pwPtr) : pointerToPlaneWings(pwPtr) {}
+    ~PlaneWingsWrapper()
+    {
+        delete pointerToPlaneWings;
+    }
+    PlaneWings* pointerToPlaneWings = nullptr;
 };
 
 void PlaneWings::printInfoAboutPlaneWings()
@@ -517,6 +475,18 @@ struct Kitchen
     
     void designSpace(std::string addSlightVariation, int wallWidth);
     void safetyAlertViaWiFi(int currentOvenTemp, int setOvenTemp, int currentTime, std::string newModel);
+
+    JUCE_LEAK_DETECTOR(Kitchen)
+};
+
+struct KitchenWrapper
+{
+    KitchenWrapper(Kitchen* kPtr) : pointerToKitchen(kPtr) {}
+    ~KitchenWrapper()
+    {
+        delete pointerToKitchen;
+    }
+    Kitchen* pointerToKitchen = nullptr;
 };
 
 Kitchen::Kitchen() 
@@ -579,6 +549,18 @@ struct Concorde
     
     double lengthDeIcingPanel (double variation);
     int topSpeed(int cNumEngines);
+
+    JUCE_LEAK_DETECTOR(Concorde)
+};
+
+struct ConcordeWrapper
+{
+    ConcordeWrapper(Concorde* concPtr) : pointerToConcorde(concPtr) {}
+    ~ConcordeWrapper()
+    {
+        delete pointerToConcorde;
+    }
+    Concorde* pointerToConcorde = nullptr;
 };
 
 Concorde::Concorde() 
@@ -633,17 +615,17 @@ int Concorde::topSpeed(int cNumEngines)
 #include <iostream>
 int main() 
 {  
-    Cat mittens;
+    CatWrapper mittensW( new Cat() );
     
-    mittens.makeNoise(true);
-    mittens.scratchFurniture(false, 10);
-    mittens.sleep(true);
-    mittens.gainWeight(2);
+    mittensW.pointerToCat->makeNoise(true);
+    mittensW.pointerToCat->scratchFurniture(false, 10);
+    mittensW.pointerToCat->sleep(true);
+    mittensW.pointerToCat->gainWeight(2);
     
-    std::cout << "Mittens has a " << mittens.tailLength << " inch long " << mittens.furColor << " tail!" << std::endl;
+    std::cout << "Mittens has a " << mittensW.pointerToCat->tailLength << " inch long " << mittensW.pointerToCat->furColor << " tail!" << std::endl;
 
-    mittens.printInfoAboutCat();
-   
+    mittensW.pointerToCat->printInfoAboutCat();
+
     Cat::Kitten mittensJunior;
     
     mittensJunior.feed(true);
@@ -654,18 +636,18 @@ int main()
     std::cout << "Mittens Junior is " << (2022 - mittensJunior.birthYear) << " year old " << mittensJunior.catBreed << std::endl;
 
     mittensJunior.printInfoAboutKitten();
-    
-    Range myRange;
-    
-    myRange.consumeFuel("electric", 65);
-    myRange.breaksDown(70);
-    myRange.heatsTheKitchen(7, 420);
-    myRange.getBigger(1501);
-    
-    std::cout << "My range has a " << myRange.fuelType << " powered oven that reaches up to " << myRange.maxTempOven
-              << " F in temp." << std::endl;
 
-    myRange.printInfoAboutRange();
+    RangeWrapper myRangeW( new Range() );
+    
+    myRangeW.pointerToRange->consumeFuel("electric", 65);
+    myRangeW.pointerToRange->breaksDown(70);
+    myRangeW.pointerToRange->heatsTheKitchen(7, 420);
+    myRangeW.pointerToRange->getBigger(1501);
+    
+    std::cout << "My range has a " << myRangeW.pointerToRange->fuelType << " powered oven that reaches up to " << myRangeW.pointerToRange->maxTempOven
+              << " F in teWmp." << std::endl;
+
+    myRangeW.pointerToRange->printInfoAboutRange();
     
     Range::RangeControls specialFeature;
     specialFeature.printDaysLeft(20220630);
@@ -681,26 +663,26 @@ int main()
 
      backControls.printInfoAboutRangeControls();
 
-    PlaneWings jjWings;
+    PlaneWingsWrapper jjWingsW( new PlaneWings() );
     
-    jjWings.generateLift(true, "down");
-    jjWings.reduceDrag(10.f);
-    jjWings.lowersLandingSpeed(10, false, 50);
-    jjWings.flex(26);
+    jjWingsW.pointerToPlaneWings->generateLift(true, "down");
+    jjWingsW.pointerToPlaneWings->reduceDrag(10.f);
+    jjWingsW.pointerToPlaneWings->lowersLandingSpeed(10, false, 50);
+    jjWingsW.pointerToPlaneWings->flex(26);
     
-    std::cout << "The jumbo jet has a wingspan of " << jjWings.wingSpan << " ft and " << jjWings.numEngines << " engines are attached to the lower side of the wings." << std::endl;
+    std::cout << "The jumbo jet has a wingspan of " << jjWingsW.pointerToPlaneWings->wingSpan << " ft and " << jjWingsW.pointerToPlaneWings->numEngines << " engines are attached to the lower side of the wings." << std::endl;
 
-    jjWings.printInfoAboutPlaneWings();
+    jjWingsW.pointerToPlaneWings->printInfoAboutPlaneWings();
 
-    Kitchen myKitchen;
+    KitchenWrapper myKitchenW( new Kitchen() );
     
-    myKitchen.designSpace("darker", 80);
-    myKitchen.safetyAlertViaWiFi(380, 390, 2397, "new");
+    myKitchenW.pointerToKitchen->designSpace("darker", 80);
+    myKitchenW.pointerToKitchen->safetyAlertViaWiFi(380, 390, 2397, "new");
     
-    Concorde concorde;
+    ConcordeWrapper concordeW( new Concorde() );
     
-    concorde.lengthDeIcingPanel(10);
-    concorde.topSpeed(2);
+    concordeW.pointerToConcorde->lengthDeIcingPanel(10);
+    concordeW.pointerToConcorde->topSpeed(2);
 
     std::cout << "good to go!" << std::endl;
 }
