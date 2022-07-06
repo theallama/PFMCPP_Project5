@@ -1,3 +1,81 @@
+/*
+  Project 5: Part 3 / 4
+  video: Chapter 3 Part 4: 
+
+ Create a branch named Part3
+
+  the 'new' keyword
+
+  1) add #include "LeakedObjectDetector.h" to main
+  
+  2) Add 'JUCE_LEAK_DETECTOR(OwnerClass)' at the end of your UDTs.
+  
+  3) write the name of your class where it says "OwnerClass"
+  
+  4) write wrapper classes for each type similar to how it was shown in the video
+  
+  5) update main() 
+       replace your objects with your wrapper classes, which have your UDTs as pointer member variables.
+       
+     This means if you had something like the following in your main() previously: 
+ */
+ // #if false
+ //  Axe axe;
+ //  std::cout << "axe sharpness: " << axe.sharpness << "\n";
+ //  #endif
+  /*
+     you would update that to use your wrappers:
+     
+  */
+
+ // #if false
+ // AxeWrapper axWrapper( new Axe() );
+ // std::cout << "axe sharpness: " << axWrapper.axPtr->sharpness << "\n";
+ // #endif
+ /*
+ notice that the object name has changed from 'axe' to 'axWrapper'
+ You don't have to do this, you can keep your current object name and just change its type to your Wrapper class
+
+ 6) If you have a class that has a nested class in it, and an instantiation of that nested class as a member variable, 
+     - you do not need to write a Wrapper for that nested class
+     - you do not need to replace that nested instance with a wrapped instance.
+     If you want an explanation, message me in Slack
+
+ 7) If you were using any UDTs as function arguments like this:
+ */
+ // #if false
+ // void someMemberFunction(Axe axe);
+ // #endif
+ /*
+   Pass those arguments by Reference now that you know what references are (Project 6 Part 2).
+ */
+ // #if false
+ // void someMemberFunction(Axe& axe);
+ // #endif
+ /*
+ If you aren't modifying the passed-in object inside the function, pass by 'const reference'.
+ Marking a function parameter as 'const' means that you are promising that the parameter will not be modified.
+ Additionally, you can mark class member functions as 'const'
+ If you do this, you are promising that the member function will not modify any member variables.
+
+ Mark every member function that is not modifying any member variables as 'const'
+ */
+ // #if false
+ //a function where the argument is passed by const-ref
+ // void someMemberFunction(const Axe& axe);
+
+ //a member function that is marked const, meaning it will not modify any member variables of the 'Axe' class.
+ // void Axe::aConstMemberFunction() const { }
+ // #endif
+ /*
+  8) After you finish, click the [run] button.  Clear up any errors or warnings as best you can.
+  
+  see here for an example: https://repl.it/@matkatmusic/ch3p04example
+
+  Clear any warnings about exit-time-destructors.
+  Suppress them by adding -Wno-exit-time-destructors to the .replit file with the other warning suppression flags
+  */
+
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wexit-time-destructors"
 #include <iostream>
