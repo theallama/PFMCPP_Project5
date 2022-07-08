@@ -108,15 +108,27 @@ struct Cat
     JUCE_LEAK_DETECTOR(Cat)
 };
 
+// struct CatWrapper
+// {
+//     CatWrapper(Cat* catPtr) : pointerToCat(catPtr) {}
+//     ~CatWrapper()
+//     {
+//         delete pointerToCat;
+//     }
+
+// };
+
 struct CatWrapper
 {
-    CatWrapper(Cat* catPtr) : pointerToCat(catPtr) {}
-    ~CatWrapper()
-    {
-        delete pointerToCat;
-    }
+    CatWrapper(Cat* catPtr);
+    ~CatWrapper();
     Cat* pointerToCat = nullptr;
 };
+CatWrapper::CatWrapper(Cat* catPtr) : pointerToCat(catPtr) {}
+CatWrapper::~CatWrapper()
+{
+    delete pointerToCat;    
+}
 
 void Cat::printInfoAboutCat()
 {
@@ -298,15 +310,27 @@ struct Range
     JUCE_LEAK_DETECTOR(Range)
 };
 
+// struct RangeWrapper
+// {
+//     RangeWrapper(Range* rPtr) : pointerToRange(rPtr) {}
+//     ~RangeWrapper()
+//     {
+//         delete pointerToRange;
+//     }
+//     Range* pointerToRange = nullptr;
+// };
+
 struct RangeWrapper
 {
-    RangeWrapper(Range* rPtr) : pointerToRange(rPtr) {}
-    ~RangeWrapper()
-    {
-        delete pointerToRange;
-    }
+    RangeWrapper(Range* rPtr);
+    ~RangeWrapper();
     Range* pointerToRange = nullptr;
 };
+RangeWrapper::RangeWrapper(Range* rPtr) : pointerToRange(rPtr) {}
+RangeWrapper::~RangeWrapper()
+{
+    delete pointerToRange;
+}
 
 void Range::printInfoAboutRange()
 {
@@ -457,16 +481,30 @@ struct PlaneWings
     JUCE_LEAK_DETECTOR(PlaneWings)
 };
 
+// struct PlaneWingsWrapper
+// {
+//     PlaneWingsWrapper( PlaneWings* pwPtr) : pointerToPlaneWings(pwPtr) {}
+//     ~PlaneWingsWrapper()
+//     {
+//         delete pointerToPlaneWings;
+//     }
+//     PlaneWings* pointerToPlaneWings = nullptr;
+// };
+
 struct PlaneWingsWrapper
 {
-    PlaneWingsWrapper( PlaneWings* pwPtr) : pointerToPlaneWings(pwPtr) {}
-    ~PlaneWingsWrapper()
-    {
-        delete pointerToPlaneWings;
-    }
+    PlaneWingsWrapper(PlaneWings* pwPtr);
+    ~PlaneWingsWrapper();
     PlaneWings* pointerToPlaneWings = nullptr;
 };
 
+PlaneWingsWrapper::PlaneWingsWrapper(PlaneWings* pwPtr) : pointerToPlaneWings(pwPtr) {}
+PlaneWingsWrapper::~PlaneWingsWrapper()
+{
+    delete pointerToPlaneWings;    
+}
+
+    
 void PlaneWings::printInfoAboutPlaneWings()
 {
     std::cout << "'The jumbo jet has a wingspan of " << this->wingSpan << " ft and " << this->numEngines << " engines are attached to the lower side of the wings." << std::endl;
@@ -541,15 +579,27 @@ struct Kitchen
     JUCE_LEAK_DETECTOR(Kitchen)
 };
 
+// struct KitchenWrapper
+// {
+//     KitchenWrapper(Kitchen* kPtr) : pointerToKitchen(kPtr) {}
+//     ~KitchenWrapper()
+//     {
+//         delete pointerToKitchen;
+//     }
+//     Kitchen* pointerToKitchen = nullptr;
+// };
 struct KitchenWrapper
 {
-    KitchenWrapper(Kitchen* kPtr) : pointerToKitchen(kPtr) {}
-    ~KitchenWrapper()
-    {
-        delete pointerToKitchen;
-    }
+    KitchenWrapper(Kitchen* kPtr);
+    ~KitchenWrapper();
     Kitchen* pointerToKitchen = nullptr;
 };
+
+KitchenWrapper::KitchenWrapper(Kitchen* kPtr) : pointerToKitchen(kPtr) {}
+KitchenWrapper::~KitchenWrapper()
+{
+    delete pointerToKitchen;  
+}
 
 Kitchen::Kitchen() 
 {
@@ -615,15 +665,27 @@ struct Concorde
     JUCE_LEAK_DETECTOR(Concorde)
 };
 
+// struct ConcordeWrapper
+// {
+//     ConcordeWrapper(Concorde* concPtr) : pointerToConcorde(concPtr) {}
+//     ~ConcordeWrapper()
+//     {
+//         delete pointerToConcorde;
+//     }
+//     Concorde* pointerToConcorde = nullptr;
+// };
+
 struct ConcordeWrapper
 {
-    ConcordeWrapper(Concorde* concPtr) : pointerToConcorde(concPtr) {}
-    ~ConcordeWrapper()
-    {
-        delete pointerToConcorde;
-    }
-    Concorde* pointerToConcorde = nullptr;
+    ConcordeWrapper(Concorde* concPtr);
+    ~ConcordeWrapper();
+     Concorde* pointerToConcorde = nullptr;
 };
+ConcordeWrapper::ConcordeWrapper(Concorde* concPtr) : pointerToConcorde(concPtr) {}
+ConcordeWrapper::~ConcordeWrapper()
+{
+    delete pointerToConcorde;  
+}
 
 Concorde::Concorde() 
 {
