@@ -45,13 +45,13 @@
         Mark every member function that is not modifying any member variables as 'const'
         Mark every function parameter that is not modified inside the function as 'const'
 */
-#if false
+// #if false
 //a function where the argument is passed by const-ref.
-void Foo::someMemberFunction(const Axe& axe);
+// void Foo::someMemberFunction(const Axe& axe);
 
 //a member function that is marked const, meaning it will not modify any member variables of the 'Axe' class.
-void Axe::aConstMemberFunction() const { }
-#endif
+// void Axe::aConstMemberFunction() const { }
+// #endif
 /*
  9) click the [run] button.  Clear up any errors or warnings as best you can.
  
@@ -60,7 +60,8 @@ void Axe::aConstMemberFunction() const { }
          tip: you cannot forward-declare nested types!  
          The file that a nested type is defined in MUST be included wherever that nested type is written.
  */
-
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wexit-time-destructors"
 #include <iostream>
 #include <math.h>
 #include "LeakedObjectDetector.h"
@@ -88,19 +89,19 @@ struct Cat
         int numWhiskers{24};
         std::string catBreed = "Tabby";
         
-        void feed(bool isHungry); FIXME: check if you can use 'const'
-        void pet(bool isAffectionate, float minutesToPet); FIXME: check if you can use 'const'
-        void roamNeighborhood(bool rainyWeather, float avgCatTravels = 20.f); FIXME: check if you can use 'const'
-        void roll(int numRolls, int happyIdxOutOfTen); FIXME: check if you can use 'const'
-        void printInfoAboutKitten(); FIXME: check if you can use 'const'
+        void feed(const bool isHungry); 
+        void pet(const bool isAffectionate, const float minutesToPet); 
+        void roamNeighborhood(const bool rainyWeather, const float avgCatTravels = 20.f);
+        void roll(const int numRolls, const int happyIdxOutOfTen); 
+        void printInfoAboutKitten(); 
     };
             
-    void scratchFurniture(bool isChair = false, int numberOfFurniture = 10); FIXME: check if you can use 'const'
-    void makeNoise(bool foodBowlEmpty = true); FIXME: check if you can use 'const'
-    bool sleep(bool isAsleep = true); FIXME: check if you can use 'const'
-    void typicalCat(std::string, int, float); FIXME: check if you can use 'const'
-    void gainWeight(int weight); FIXME: check if you can use 'const'
-    void printInfoAboutCat(); FIXME: check if you can use 'const'
+    void scratchFurniture(const bool isChair = false, const int numberOfFurniture = 10);
+    void makeNoise(const bool foodBowlEmpty = true); 
+    bool sleep(const bool isAsleep = true); 
+    void typicalCat(const std::string, const int, const float); 
+    void gainWeight(const int weight); 
+    void printInfoAboutCat();
     
     Kitten kittenJunior;
 
@@ -278,19 +279,19 @@ struct Range
         bool isAnalog = false;
         int maxKnobTurned = 10;
         
-        void printDaysLeft(int warrantyBy); FIXME: check if you can use 'const'
-        void informCurrentTime(bool timeUpdated); FIXME: check if you can use 'const'
-        void indicateRepairDate(std::string date, bool needsRepair); FIXME: check if you can use 'const'
-        bool selfCleans(bool heavyCleaning = true, std::string setting = ""); FIXME: check if you can use 'const'
-        void turnUpTemp(int ovenTemp); FIXME: check if you can use 'const'
-        void printInfoAboutRangeControls(); FIXME: check if you can use 'const'
+        void printDaysLeft(const int warrantyBy); 
+        void informCurrentTime(const bool timeUpdated); 
+        void indicateRepairDate(const std::string date, const bool needsRepair); 
+        bool selfCleans(const bool heavyCleaning = true, const std::string setting = ""); 
+        void turnUpTemp(const int ovenTemp); 
+        void printInfoAboutRangeControls();
     };
     
-    void consumeFuel(std::string, int); FIXME: check if you can use 'const'
-    void breaksDown(int ageOfHeatingElement); FIXME: check if you can use 'const'
-    void heatsTheKitchen(int, int); FIXME: check if you can use 'const'
-    void getBigger(int price); FIXME: check if you can use 'const'
-    void printInfoAboutRange(); FIXME: check if you can use 'const'
+    void consumeFuel(const std::string, const int); 
+    void breaksDown(const int ageOfHeatingElement); 
+    void heatsTheKitchen(const int, const int); 
+    void getBigger(const int price); 
+    void printInfoAboutRange(); 
     
     RangeControls updatedSettings;
 
@@ -411,7 +412,7 @@ void Range::RangeControls::informCurrentTime(bool timeUpdated)
     }
     std::cout << "Current time is: " << currentTime << std::endl;
 }
-void Range::RangeControls::indicateRepairDate(std::string date, bool needsRepair) 
+void Range::RangeControls::indicateRepairDate(std::string const date, bool needsRepair) 
 {
     if (needsRepair) 
     {
@@ -447,11 +448,11 @@ struct PlaneWings
     double wingSpan;
     int maxSpeed = 656;
     
-    void generateLift(bool, std::string); FIXME: check if you can use 'const'
-    bool reduceDrag(float tailwind = 10.f); FIXME: check if you can use 'const'
-    void lowersLandingSpeed(int drag, bool landed = false, float landingSpeed = 30.2f); FIXME: check if you can use 'const'
-    void flex(int flex); FIXME: check if you can use 'const'
-    void printInfoAboutPlaneWings(); FIXME: check if you can use 'const'
+    void generateLift(const bool, const std::string); 
+    bool reduceDrag(const float tailwind = 10.f); 
+    void lowersLandingSpeed(const int drag, const bool landed = false, const float landingSpeed = 30.2f); 
+    void flex(const int flex); 
+    void printInfoAboutPlaneWings(); 
 
     JUCE_LEAK_DETECTOR(PlaneWings)
 };
@@ -534,8 +535,8 @@ struct Kitchen
     Kitchen();
     ~Kitchen();
     
-    void designSpace(std::string addSlightVariation, int wallWidth); FIXME: check if you can use 'const'
-    void safetyAlertViaWiFi(int currentOvenTemp, int setOvenTemp, int currentTime, std::string newModel); FIXME: check if you can use 'const'
+    void designSpace(const std::string addSlightVariation, const int wallWidth); 
+    void safetyAlertViaWiFi(const int currentOvenTemp, const int setOvenTemp, const int currentTime, std::string newModel);
 
     JUCE_LEAK_DETECTOR(Kitchen)
 };
