@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Atomic.h"
 #include <cassert>
 
