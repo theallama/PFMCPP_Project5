@@ -1,6 +1,4 @@
 #pragma once
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wexit-time-destructors"
 #include "Atomic.h"
 #include <cassert>
 
